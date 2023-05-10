@@ -4,6 +4,7 @@ import FacebookProvider from "next-auth/providers/facebook"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import TwitterProvider from "next-auth/providers/twitter"
+import FusionAuthProvider from "next-auth/providers/fusionauth";
 // import EmailProvider from "next-auth/providers/email"
 // import AppleProvider from "next-auth/providers/apple"
 
@@ -12,6 +13,14 @@ import TwitterProvider from "next-auth/providers/twitter"
 export default NextAuth({
   // https://next-auth.js.org/configuration/providers
   providers: [
+    FusionAuthProvider({
+      id: "fusionauth",
+      name: "FusionAuth",
+      issuer:  process.env.FUSIONAUTH_ISSUER,
+      clientId: "process.env.FUSIONAUTH_CLIENT_ID",
+      clientSecret: "process.env.FUSIONAUTH_SECRET",
+      tenantId: process.env.FUSIONAUTH_TENANT_ID // Only required if you're using multi-tenancy
+    }),
     // EmailProvider({
     //   server: process.env.EMAIL_SERVER,
     //   from: process.env.EMAIL_FROM,
